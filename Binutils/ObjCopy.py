@@ -3,17 +3,19 @@
 # ObjCopy.py -- objcopy
 # Copyright (C) 2024  Jacob Koziej <jacobkoziej@gmail.com>
 
-import SCons
+from SCons.Action import Action
+from SCons.Builder import BuilderBase
+from SCons.Script.SConscript import SConsEnvironment
 
 
-def generate(env):
+def generate(env: SConsEnvironment) -> None:
     if env.Detect('ObjCopy'):
         return
 
     env['OBJCOPY'] = env.get('OBJCOPY', 'objcopy')
 
-    builder = env.Builder(
-        action=SCons.Action.Action(
+    builder: BuilderBase = env.Builder(
+        action=Action(
             '$OBJCOPY $OBJCOPYFLAGS $SOURCE $TARGET',
             '$OBJCOPYCOMSTR',
         ),
@@ -22,5 +24,5 @@ def generate(env):
     env['BUILDERS']['ObjCopy'] = builder
 
 
-def exists(env):
+def exists(env: SConsEnvironment) -> bool:
     return env.Detect('ObjCopy')

@@ -6,14 +6,16 @@
 from . import Binutils
 from . import Phony
 
+from SCons.Script.SConscript import SConsEnvironment
 
-def generate(env):
+
+def generate(env: SConsEnvironment) -> None:
     Binutils.generate(env)
     Phony.generate(env)
 
 
-def exists(env):
-    exists = True
+def exists(env: SConsEnvironment) -> bool:
+    exists: bool = True
 
     exists &= Binutils.exists(env)
     exists &= Phony.exists(env)

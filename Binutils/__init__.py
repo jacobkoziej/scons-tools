@@ -5,13 +5,15 @@
 
 from . import ObjCopy
 
+from SCons.Script.SConscript import SConsEnvironment
 
-def generate(env):
+
+def generate(env: SConsEnvironment) -> None:
     ObjCopy.generate(env)
 
 
-def exists(env):
-    exists = True
+def exists(env: SConsEnvironment) -> bool:
+    exists: bool = True
 
     exists &= ObjCopy.exists(env)
 
