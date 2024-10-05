@@ -16,7 +16,7 @@ def generate(env: SConsEnvironment) -> None:
 
     builder: BuilderBase = env.Builder(
         action=Action(
-            '$NBCONVERT $NBCONVERTFLAGS $SOURCE $TARGET',
+            '$NBCONVERT $NBCONVERTFLAGS $SOURCE --output-dir=${TARGET.dir} --output=${TARGET.file}',
             '$NBCONVERTCOMSTR',
         ),
     )
